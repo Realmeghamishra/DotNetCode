@@ -53,15 +53,19 @@ steps:
     pathtoPublish: '$(outputPath)'
     artifactName: 'published'
 
-- task: DownloadPipelineArtifact@2
-  inputs:
-    artifact: WebApp
 - task: DownloadBuildArtifacts@1
   inputs:
     buildType: 'current'
     downloadType: 'single'
-    artifactName: 'Downloadedartifact'
-    downloadPath: '$(outputPath)'
+    artifactName: 'published'
+    downloadPath: '$(outputPath)/downloaded'
     extractTars: false
   
       
+
+# - task: DownloadBuildArtifacts@0
+#   displayName: 'Download Published Artifact'
+#   inputs:
+#     buildType: 'current'
+#     artifactName: 'published'
+#     downloadPath: '$(Pipeline.Workspace)/DownloadedArtifact'
