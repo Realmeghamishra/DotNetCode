@@ -60,12 +60,24 @@ steps:
     artifactName: 'published'
     downloadPath: '$(outputPath)/downloaded'
     extractTars: false
-  
-      
+#   downloadPath: '$(Pipeline.Workspace)/DownloadedArtifact'
 
-# - task: DownloadBuildArtifacts@0
-#   displayName: 'Download Published Artifact'
-#   inputs:
-#     buildType: 'current'
-#     artifactName: 'published'
-#     downloadPath: '$(Pipeline.Workspace)/DownloadedArtifact'
+- task: Bash@3
+  displayName: 'Substitute Variable in Dockerfile'
+  inputs:
+      targetType: 'inline'
+      script: |
+        echo "Substituting parameters in Dockerfile"
+        sed -i "s|__Published__|$(outputPath)|g" Dockerfile
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'acr-svc-conn'
+    repository: 'dotnet-app'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      Latest
+
+    
