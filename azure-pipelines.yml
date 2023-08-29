@@ -15,15 +15,6 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    installationPath: $(Agent.ToolsDirectory)/dotnet
-
-# - task: UseDotNet@2
-#   displayName: 'Use .Net Core sdk 2.1.x'
-#   inputs:
-#     packageType: sdk
-#     version: 2.1.x
-#     installationPath: $(Agent.ToolsDirectory)/dotnet
-#     includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore NuGet Packages'
@@ -56,10 +47,10 @@ steps:
     publishWebProjects: true  # Change to true if your project is a web application
     zipAfterPublish: false
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    pathtoPublish: '$(outputPath)'
-    artifactName: 'published'
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact'
+#   inputs:
+#     pathtoPublish: '$(outputPath)'
+#     artifactName: 'published'
   
       
