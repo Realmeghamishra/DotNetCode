@@ -68,7 +68,7 @@ steps:
       targetType: 'inline'
       script: |
         echo "Substituting parameters in Dockerfile"
-        sed -i "s|__Published__|$(outputPath)|g" Dockerfile
+        sed -i "s|__PUBLISHED_CODE__|$(outputPath)|g" Dockerfile
 
 - task: Docker@2
   inputs:
