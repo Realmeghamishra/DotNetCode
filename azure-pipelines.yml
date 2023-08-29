@@ -47,10 +47,21 @@ steps:
     publishWebProjects: true  # Change to true if your project is a web application
     zipAfterPublish: false
 
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact'
-#   inputs:
-#     pathtoPublish: '$(outputPath)'
-#     artifactName: 'published'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    pathtoPublish: '$(outputPath)'
+    artifactName: 'published'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: WebApp
+- task: DownloadBuildArtifacts@1
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    artifactName: 'Downloadedartifact'
+    downloadPath: '$(outputPath)'
+    extractTars: false
   
       
