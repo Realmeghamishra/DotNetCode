@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: dotnetapp
-          image: helloacr0403.azurecr.io/dotnet-app:Latest
+          image: helloacr0403.azurecr.io/dotnet-app:latest
           ports:
             - containerPort: 80
 ---
