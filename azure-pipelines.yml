@@ -119,11 +119,8 @@ steps:
 - task: KubernetesManifest@1
   inputs:
     action: 'deploy'
-    connectionType: 'azureResourceManager'
-    azureSubscriptionConnection: 'Hellovip.in(15b6ce8f-b9ba-45be-9ca9-4337ad8c7f8d)'
-    azureResourceGroup: 'aks-acr-rg'
-    kubernetesCluster: 'helloaks0403'
-    useClusterAdmin: true
+    connectionType: 'kubernetesServiceConnection'
+    kubernetesServiceConnection: 'aks-svc-conn'
     namespace: 'default'
     manifests: 'deployment.yaml'
 
