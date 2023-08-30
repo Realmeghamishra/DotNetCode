@@ -88,7 +88,8 @@ steps:
       cd '$(Pipeline.Workspace)'
       ls
       echo 'Contents of downloaded-artifact:'
-      ls -R $(Pipeline.Workspace)/downloaded-artifact
+      cd downloaded-artifact
+      ls
 
 - task: Docker@2
   inputs:
