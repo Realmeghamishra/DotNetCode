@@ -59,9 +59,12 @@ steps:
     script: |
       # Write your commands here
       
-      echo 'Hello world'
+      echo 'Hello world -current directory'
       ls
+      echo 'Hello world - Output directory'
       cd '$(outputPath)'
+      ls
+
 
 - task: DownloadBuildArtifacts@1
   inputs:
