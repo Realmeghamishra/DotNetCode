@@ -116,6 +116,17 @@ steps:
       $(Build.BuildId)
       latest
 
+- task: KubernetesManifest@1
+  inputs:
+    action: 'deploy'
+    connectionType: 'azureResourceManager'
+    azureSubscriptionConnection: 'Hellovip.in(15b6ce8f-b9ba-45be-9ca9-4337ad8c7f8d)'
+    azureResourceGroup: 'aks-acr-rg'
+    kubernetesCluster: 'helloaks0403'
+    useClusterAdmin: true
+    namespace: 'default'
+    manifests: 'deployment.yaml'
+
 # - script: |
 #           git config --global user.name "Azure DevOps"
 #           git config --global user.email "mishramegha0403@gamil.com"
@@ -134,14 +145,6 @@ steps:
 #         echo "Substituting parameters in Dockerfile"
 #         sed -i "s|__PUBLISHED_CODE__|$(outputPath)|g" Dockerfile
 
-# - task: Docker@2
-#   inputs:
-#     containerRegistry: 'acr-svc-conn'
-#     repository: 'dotnet-app'
-#     command: 'buildAndPush'
-#     Dockerfile: 'Dockerfile'
-#     tags: |
-#       $(Build.BuildId)
-#       Latest
+
 
     
