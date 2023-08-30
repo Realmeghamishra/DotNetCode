@@ -100,7 +100,7 @@ steps:
   inputs:
     containerRegistry: 'acr-svc-conn'
     repository: 'dotnet-app'
-    command: 'build'
+    command: 'buildAndPush'
     Dockerfile: 'Dockerfile'
     buildContext: '$(Pipeline.Workspace)/downloaded-artifact'
     tags: |
