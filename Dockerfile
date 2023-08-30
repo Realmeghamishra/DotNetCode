@@ -1,5 +1,5 @@
 # Stage 1: Runtime Stage
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 
 # Copy the published output from Azure DevOps Pipeline 
