@@ -90,13 +90,17 @@ steps:
       echo 'Contents of downloaded-artifact:'
       cd downloaded-artifact
       ls
+      echo 'Contents of published:'
+      cd published
+      ls
+
 
 - task: Docker@2
   inputs:
     containerRegistry: 'acr-svc-conn'
     repository: 'dotnet-app'
     command: 'build'
-    Dockerfile: '$(Pipeline.Workspace)/downloaded-artifact/Dockerfile'
+    Dockerfile: '$(Pipeline.Workspace)/Dockerfile'
     buildContext: '$(Pipeline.Workspace)/downloaded-artifact'
     tags: |
       $(Build.BuildId)
