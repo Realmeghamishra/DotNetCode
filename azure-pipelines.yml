@@ -100,9 +100,18 @@ steps:
   inputs:
     containerRegistry: 'acr-svc-conn'
     repository: 'dotnet-app'
-    command: 'buildAndPush'
+    command: 'build'
     Dockerfile: 'Dockerfile'
     buildContext: '$(Pipeline.Workspace)/downloaded-artifact'
+    tags: |
+      $(Build.BuildId)
+      latest
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'acr-svc-conn'
+    repository: 'dotnet-app'
+    command: 'push'
     tags: |
       $(Build.BuildId)
       latest
