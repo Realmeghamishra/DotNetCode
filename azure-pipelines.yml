@@ -62,13 +62,13 @@ steps:
     extractTars: false
 #   downloadPath: '$(Pipeline.Workspace)/DownloadedArtifact'
 
-- task: Bash@3
-  displayName: 'Substitute Variable in Dockerfile'
-  inputs:
-      targetType: 'inline'
-      script: |
-        echo "Substituting parameters in Dockerfile"
-        sed -i "s|__PUBLISHED_CODE__|$(outputPath)|g" Dockerfile
+# - task: Bash@3
+#   displayName: 'Substitute Variable in Dockerfile'
+#   inputs:
+#       targetType: 'inline'
+#       script: |
+#         echo "Substituting parameters in Dockerfile"
+#         sed -i "s|__PUBLISHED_CODE__|$(outputPath)|g" Dockerfile
 
 - task: Docker@2
   inputs:
