@@ -65,7 +65,6 @@ steps:
       cd '$(outputPath)'
       ls
 
-
 - task: DownloadBuildArtifacts@1
   inputs:
     buildType: 'current'
@@ -74,11 +73,20 @@ steps:
     #downloadPath: '$(outputPath)/downloaded'
     extractTars: false
     downloadPath: '$(Pipeline.Workspace)/downloaded-artifact'
-
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
+      # Write your commands here
+      
+      echo 'Hello world -current directory 2'
+      ls
+      echo 'Hello world - Output directory 2'
+      cd '$(outputPath)'
+      ls
+      echo 'Hello world - Pipeline.Workspace'
+      cd '$(Pipeline.Workspace)'
+      ls
       echo 'Contents of downloaded-artifact:'
       ls -R $(Pipeline.Workspace)/downloaded-artifact
 
