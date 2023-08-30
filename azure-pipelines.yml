@@ -67,8 +67,8 @@ steps:
     containerRegistry: 'acr-svc-conn'
     repository: 'dotnet-app'
     command: 'build'
-    Dockerfile: '$(Pipeline.Workspace)/docker-context/Dockerfile'
-    buildContext: '$(Pipeline.Workspace)/docker-context'
+    Dockerfile: '$(Pipeline.Workspace)/downloaded-artifact/Dockerfile'
+    buildContext: '$(Pipeline.Workspace)/downloaded-artifact'
     tags: |
       $(Build.BuildId)
       latest
