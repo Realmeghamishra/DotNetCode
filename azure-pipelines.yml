@@ -62,15 +62,26 @@ steps:
     extractTars: false
     downloadPath: '$(Pipeline.Workspace)/downloaded-artifact'
 
-- script: |
-          git config --global user.name "Azure DevOps"
-          git config --global user.email "mishramegha0403@gamil.com"
-          cd $(Pipeline.Workspace)/downloaded-artifact
-          git init
-          git add .
-          git commit -m "Initial commit"
-          git remote add origin https://github.com/Realmeghamishra/DotNetCode.git
-          git push -u origin main
+- task: Docker@2
+  inputs:
+    containerRegistry: 'acr-svc-conn'
+    repository: 'dotnet-app'
+    command: 'build'
+    Dockerfile: '$(Pipeline.Workspace)/docker-context/Dockerfile'
+    buildContext: '$(Pipeline.Workspace)/docker-context'
+    tags: |
+      $(Build.BuildId)
+      latest
+
+# - script: |
+#           git config --global user.name "Azure DevOps"
+#           git config --global user.email "mishramegha0403@gamil.com"
+#           cd $(Pipeline.Workspace)/downloaded-artifact
+#           git init
+#           git add .
+#           git commit -m "Initial commit"
+#           git remote add origin https://github.com/Realmeghamishra/DotNetCode.git
+#           git push -u origin main
 
 # - task: Bash@3
 #   displayName: 'Substitute Variable in Dockerfile'
@@ -80,14 +91,14 @@ steps:
 #         echo "Substituting parameters in Dockerfile"
 #         sed -i "s|__PUBLISHED_CODE__|$(outputPath)|g" Dockerfile
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'acr-svc-conn'
-    repository: 'dotnet-app'
-    command: 'buildAndPush'
-    Dockerfile: 'Dockerfile'
-    tags: |
-      $(Build.BuildId)
-      Latest
+# - task: Docker@2
+#   inputs:
+#     containerRegistry: 'acr-svc-conn'
+#     repository: 'dotnet-app'
+#     command: 'buildAndPush'
+#     Dockerfile: 'Dockerfile'
+#     tags: |
+#       $(Build.BuildId)
+#       Latest
 
     
