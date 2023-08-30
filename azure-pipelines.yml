@@ -71,7 +71,6 @@ steps:
           git commit -m "Initial commit"
           git remote add origin https://github.com/Realmeghamishra/DotNetCode.git
           git push -u origin main
-          displayName: Copy to GitHub Repository
 
 # - task: Bash@3
 #   displayName: 'Substitute Variable in Dockerfile'
