@@ -4,7 +4,8 @@ WORKDIR /app
 
 # Copy the published output from Azure DevOps Pipeline 
 #COPY __PUBLISHED_CODE__ .
-COPY /publish .
+#COPY /publish .
+COPY . .
 
 # Set the entry point
 ENTRYPOINT ["dotnet", "RoundTheCode.AzureTestProject.dll"]
