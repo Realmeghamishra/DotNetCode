@@ -2,7 +2,7 @@ trigger:
 - none
  
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
  
 variables:
   solution: '**/RoundTheCode.AzureTestProject.sln'  # Path to your solution file
