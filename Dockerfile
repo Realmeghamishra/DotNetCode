@@ -8,7 +8,7 @@ WORKDIR /app
 #COPY . .
 #COPY --from=publish /app/publish .
 
-COPY $(System.DefaultWorkingDirectory) .
+COPY /published .
 
 # Set the entry point
 ENTRYPOINT ["dotnet", "RoundTheCode.AzureTestProject.dll"]
