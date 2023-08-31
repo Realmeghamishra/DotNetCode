@@ -7,7 +7,7 @@ pool:
 variables:
   solution: '**/RoundTheCode.AzureTestProject.sln'  # Path to your solution file
   buildConfiguration: 'Release'  # Build configuration, e.g., Debug or Release
-  outputPath: '$(Build.ArtifactStagingDirectory)/publish'  # Output directory for publish artifacts
+  outputPath: '$(System.DefaultWorkingDirectory)/publish'  # Output directory for publish artifacts
   project: '**/RoundTheCode.AzureTestProject.csproj'
 
 steps:
@@ -47,11 +47,11 @@ steps:
     publishWebProjects: true  # Change to true if your project is a web application
     zipAfterPublish: false
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    pathtoPublish: '$(outputPath)'
-    artifactName: 'published'
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact'
+#   inputs:
+#     pathtoPublish: '$(outputPath)'
+#     artifactName: 'published'
 
 - task: Bash@3
   inputs:
@@ -69,14 +69,14 @@ steps:
       cd '$(System.DefaultWorkingDirectory)'
       ls
 
-- task: DownloadBuildArtifacts@1
-  inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'published'
-    #downloadPath: '$(outputPath)/downloaded'
-    extractTars: false
-    downloadPath: '$(Pipeline.Workspace)/downloaded-artifact'
+# - task: DownloadBuildArtifacts@1
+#   inputs:
+#     buildType: 'current'
+#     downloadType: 'single'
+#     artifactName: 'published'
+#     #downloadPath: '$(outputPath)/downloaded'
+#     extractTars: false
+#     downloadPath: '$(Pipeline.Workspace)/downloaded-artifact'
     
 - task: Bash@3
   inputs:
@@ -89,15 +89,7 @@ steps:
       echo 'Hello world - Output directory 2'
       cd '$(outputPath)'
       ls
-      echo 'Hello world - Pipeline.Workspace'
-      cd '$(Pipeline.Workspace)'
-      ls
-      echo 'Contents of downloaded-artifact:'
-      cd downloaded-artifact
-      ls
-      echo 'Contents of published:'
-      cd published
-      ls
+      
 
 
 - task: Docker@2
@@ -106,7 +98,7 @@ steps:
     repository: 'dotnet-app'
     command: 'build'
     Dockerfile: 'Dockerfile'
-    buildContext: '$(Pipeline.Workspace)/downloaded-artifact'
+    #buildContext: '$(Pipeline.Workspace)/downloaded-artifact'
     tags: |
       $(Build.BuildId)
       latest
