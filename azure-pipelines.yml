@@ -64,10 +64,6 @@ steps:
       echo 'Hello world - Output directory'
       cd '$(outputPath)'
       ls
-      echo '$(System.DefaultWorkingDirectory)'
-      echo $(System.DefaultWorkingDirectory)
-      cd '$(System.DefaultWorkingDirectory)'
-      ls
 
 # - task: DownloadBuildArtifacts@1
 #   inputs:
@@ -78,36 +74,12 @@ steps:
 #     extractTars: false
 #     downloadPath: '$(Pipeline.Workspace)/downloaded-artifact'
     
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      
-      echo 'Hello world -current directory 2'
-      ls
-      echo 'Hello world - Output directory 2'
-      cd '$(outputPath)'
-      ls
-      
-
-
 - task: Docker@2
   inputs:
     containerRegistry: 'acr-svc-conn'
     repository: 'dotnet-app'
     command: 'build'
     Dockerfile: 'Dockerfile'
-    #buildContext: '$(Pipeline.Workspace)/downloaded-artifact'
-    tags: |
-      $(Build.BuildId)
-      latest
-
-- task: Docker@2
-  inputs:
-    containerRegistry: 'acr-svc-conn'
-    repository: 'dotnet-app'
-    command: 'push'
     tags: |
       $(Build.BuildId)
       latest
